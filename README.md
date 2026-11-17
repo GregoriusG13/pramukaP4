@@ -89,10 +89,12 @@ Panel pembina: `.../admin.html` · Layar: `.../layar.html` · Murid: cukup scan 
 
 | Babak | Nama | Durasi | Kompetensi |
 |---|---|---|---|
-| 1 | Pilah Sampah (20 sampah) | 10 mnt | K1 Mengenal |
-| 2 | Kuis 3R (10 soal) | 10 mnt | K2 Memahami |
-| 3 | Apa yang Kamu Lakukan? (10 soal) | 10 mnt | K3 Menerapkan |
-| 4 | Misi Regu (4 misi) | 15 mnt | K4 Menganalisis |
+| 1 | Pilah Sampah (60 sampah) | 10 mnt | K1 Mengenal |
+| 2 | Kuis 3R (30 soal) | 10 mnt | K2 Memahami |
+| 3 | Apa yang Kamu Lakukan? (30 soal) | 10 mnt | K3 Menerapkan |
+| 4 | Misi Regu (6 misi) | 15 mnt | K4 Menganalisis |
+
+Soal sengaja dibuat banyak supaya murid yang cepat tetap sibuk sampai waktu habis. Tidak masalah kalau tidak semua soal selesai.
 | 5 | Final Poin Ganda (6 soal, tampil di proyektor) | 3 mnt | Campuran |
 
 Durasi babak 1–4 bisa diubah di panel pembina sebelum babak dimulai.
@@ -107,12 +109,13 @@ Durasi babak 1–4 bisa diubah di panel pembina sebelum babak dimulai.
 Nilai = 20% × K1 + 25% × K2 + 25% × K3 + 30% × K4
 ```
 
-- **K1**: benar di Pilah Sampah + 2 soal final (dari 22)
-- **K2**: benar di Kuis 3R + 2 soal final (dari 12)
-- **K3**: benar di Apa yang Kamu Lakukan + 2 soal final (dari 12)
-- **K4**: jumlah misi yang dijawab benar oleh **regu** (dari 4)
+Untuk K1–K3, persentasenya = **benar ÷ soal yang dikerjakan** (termasuk 2 soal final per kompetensi). Jadi murid yang teliti tapi pelan tidak dirugikan.
 
-Soal yang tidak dijawab dihitung salah. Bobot dan predikat bisa diubah di `js/config.js`.
+- Supaya murid yang hanya mengerjakan sedikit soal tidak otomatis dapat 100, pembaginya minimal **15 soal (K1), 8 soal (K2), dan 8 soal (K3)**. Contoh: benar 6 dari 7 soal Kuis → 6 ÷ 8 = 75%. Angka minimum ini bisa diubah di `MIN_DIKERJAKAN` (`js/game.js`).
+- Soal yang waktunya habis (20 detik) dihitung dikerjakan tapi salah.
+- **K4**: jumlah misi yang dijawab benar oleh **regu** (dari 6).
+
+Bobot dan predikat bisa diubah di `js/config.js`.
 
 File Excel berisi 3 sheet: **Nilai** (per murid, plus kolom catatan pembina), **Rekap Regu**, dan **Keterangan** (rumus).
 
