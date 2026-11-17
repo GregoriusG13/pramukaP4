@@ -291,14 +291,10 @@ function ekspor() {
     "No": i + 1,
     "Nama": n.nama,
     "Regu": n.regu,
-    [`K1 Mengenal (benar/${tot.K1})`]: n.benar.K1,
-    "K1 %": n.persen.K1,
-    [`K2 Memahami (benar/${tot.K2})`]: n.benar.K2,
-    "K2 %": n.persen.K2,
-    [`K3 Menerapkan (benar/${tot.K3})`]: n.benar.K3,
-    "K3 %": n.persen.K3,
-    [`K4 Menganalisis/regu (benar/${tot.K4})`]: n.benar.K4,
-    "K4 %": n.persen.K4,
+    "K1 Benar": n.benar.K1, "K1 Dikerjakan": n.dikerjakan.K1, "K1 %": n.persen.K1,
+    "K2 Benar": n.benar.K2, "K2 Dikerjakan": n.dikerjakan.K2, "K2 %": n.persen.K2,
+    "K3 Benar": n.benar.K3, "K3 Dikerjakan": n.dikerjakan.K3, "K3 %": n.persen.K3,
+    [`K4 Misi Regu Benar (dari ${tot.K4})`]: n.benar.K4, "K4 %": n.persen.K4,
     "Nilai Akhir": n.nilai,
     "Predikat": n.predikat,
     "Skor Game": n.skorGame,
@@ -313,16 +309,16 @@ function ekspor() {
     { "Keterangan": "Sesi", "Isi": SESI },
     { "Keterangan": "Tanggal ekspor", "Isi": new Date().toLocaleString("id-ID") },
     { "Keterangan": "Rumus nilai", "Isi": `Nilai = ${BOBOT_NILAI.K1}% K1 + ${BOBOT_NILAI.K2}% K2 + ${BOBOT_NILAI.K3}% K3 + ${BOBOT_NILAI.K4}% K4` },
-    { "Keterangan": "K1", "Isi": `${KOMPETENSI.K1}: Babak Pilah Sampah + soal final` },
-    { "Keterangan": "K2", "Isi": `${KOMPETENSI.K2}: Babak Kuis 3R + soal final` },
-    { "Keterangan": "K3", "Isi": `${KOMPETENSI.K3}: Babak Apa yang Kamu Lakukan + soal final` },
+    { "Keterangan": "K1", "Isi": `${KOMPETENSI.K1}: Babak Pilah Sampah + soal final (${tot.K1} soal tersedia)` },
+    { "Keterangan": "K2", "Isi": `${KOMPETENSI.K2}: Babak Kuis 3R + soal final (${tot.K2} soal tersedia)` },
+    { "Keterangan": "K3", "Isi": `${KOMPETENSI.K3}: Babak Apa yang Kamu Lakukan + soal final (${tot.K3} soal tersedia)` },
     { "Keterangan": "K4", "Isi": `${KOMPETENSI.K4}: jumlah misi yang dijawab benar oleh regu` },
-    { "Keterangan": "Catatan", "Isi": "Nilai dihitung dari jawaban benar saja, tanpa bonus kecepatan, kombo, bonus kompak, atau poin manual. Soal yang tidak dijawab dihitung salah." },
+    { "Keterangan": "Catatan", "Isi": `K1–K3: % = benar ÷ soal yang dikerjakan (minimal ${MIN_DIKERJAKAN.K1}/${MIN_DIKERJAKAN.K2}/${MIN_DIKERJAKAN.K3} soal sebagai pembagi). Soal yang waktunya habis dihitung dikerjakan tapi salah. Nilai tanpa bonus kecepatan, kombo, bonus kompak, atau poin manual.` },
     { "Keterangan": "Predikat", "Isi": PREDIKAT.map((p) => `${p.label} ≥ ${p.min}`).join("; ") }
   ];
   const wb = XLSX.utils.book_new();
   const s1 = XLSX.utils.json_to_sheet(barisNilai.length ? barisNilai : [{ "Info": "Belum ada data murid" }]);
-  s1["!cols"] = [{ wch: 4 }, { wch: 22 }, { wch: 14 }, { wch: 12 }, { wch: 6 }, { wch: 12 }, { wch: 6 }, { wch: 12 }, { wch: 6 }, { wch: 14 }, { wch: 6 }, { wch: 10 }, { wch: 16 }, { wch: 10 }, { wch: 24 }];
+  s1["!cols"] = [{ wch: 4 }, { wch: 22 }, { wch: 14 }, { wch: 9 }, { wch: 13 }, { wch: 6 }, { wch: 9 }, { wch: 13 }, { wch: 6 }, { wch: 9 }, { wch: 13 }, { wch: 6 }, { wch: 22 }, { wch: 6 }, { wch: 10 }, { wch: 16 }, { wch: 10 }, { wch: 24 }];
   const s2 = XLSX.utils.json_to_sheet(barisRegu.length ? barisRegu : [{ "Info": "Belum ada regu" }]);
   s2["!cols"] = [{ wch: 9 }, { wch: 14 }, { wch: 7 }, { wch: 8 }, { wch: 50 }, { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 10 }, { wch: 14 }];
   const s3 = XLSX.utils.json_to_sheet(ket);
