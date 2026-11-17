@@ -6,13 +6,13 @@
    ========================================================= */
 
 const FIREBASE_CONFIG = {
-  apiKey: "",
-  authDomain: "",
-  databaseURL: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: "",
-  appId: ""
+  apiKey: "AIzaSyA69zqprIoxST8ZvfJgd08z-KHjl_7b5cw",
+  authDomain: "misi-sampah.firebaseapp.com",
+  databaseURL: "https://misi-sampah-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "misi-sampah",
+  storageBucket: "misi-sampah.firebasestorage.app",
+  messagingSenderId: "276643006708",
+  appId: "1:276643006708:web:4c1d8595e230cbf68936a1"
 };
 
 /* PIN untuk membuka panel pembina (admin.html). Ganti sesukamu. */
