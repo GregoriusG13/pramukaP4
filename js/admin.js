@@ -18,13 +18,14 @@ $("formPin").addEventListener("submit", (e) => {
 function mulai() {
   $("gerbang").classList.add("tersembunyi");
   $("panel").classList.remove("tersembunyi");
-  if (DEMO_MODE) { $("blokDemo").classList.remove("tersembunyi"); document.body.insertAdjacentHTML("beforeend", '<div class="pita-demo">MODE DEMO</div>'); }
+  const modeUji = DEMO_MODE || qs.get("uji") === "1";
+  if (modeUji) $("blokDemo").classList.remove("tersembunyi");
+  if (DEMO_MODE) document.body.insertAdjacentHTML("beforeend", '<div class="pita-demo">MODE DEMO</div>');
   localStorage.setItem("misiSampahSesi", SESI);
-  const dasar = location.href.split("?")[0].replace(/admin\.html$/, "");
-  const linkMurid = `${dasar}index.html?s=${SESI}`;
+  const linkMurid = new URL(`index.html?s=${SESI}`, location.href).href;
   $("linkMurid").href = linkMurid;
   $("linkMurid").textContent = linkMurid;
-  $("linkLayar").href = `${dasar}layar.html?s=${SESI}`;
+  $("linkLayar").href = new URL(`layar.html?s=${SESI}`, location.href).href;
   $("kodeSesi").textContent = SESI;
   $("inputSesi").value = SESI;
   buatQR(linkMurid);
@@ -32,7 +33,7 @@ function mulai() {
   siapkanSesi();
   Store.on(G(), (g) => { GAME = g || {}; renderSemua(); });
   setInterval(detak, 500);
-  if (DEMO_MODE) setInterval(detakBot, 1200);
+  if (modeUji) setInterval(detakBot, 1200);
 }
 
 function buatQR(teks) {
