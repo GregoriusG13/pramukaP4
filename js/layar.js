@@ -137,8 +137,7 @@ function render() {
 function renderLobi() {
   if (!qrDibuat) {
     qrDibuat = true;
-    const dasar = location.href.split("?")[0].replace(/layar\.html$/, "");
-    const link = `${dasar}index.html?s=${SESI}`;
+    const link = new URL(`index.html?s=${SESI}`, location.href).href;
     $("linkMurid").textContent = link;
     if (window.QRCode) new QRCode($("qr"), { text: link, width: 512, height: 512, correctLevel: QRCode.CorrectLevel.M });
     else $("qr").innerHTML = `<span style="color:#1B2A1F;font-weight:800;text-align:center">Kode sesi: ${SESI}</span>`;
