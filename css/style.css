@@ -1,0 +1,74 @@
+/* ============ MISI SAMPAH — gaya bersama ============ */
+:root {
+  --hutan: #1F6B3A;
+  --hutan-tua: #14492A;
+  --daun: #3FA34D;
+  --daun-muda: #E3F1E6;
+  --krem: #F7F3E8;
+  --krem-tua: #EFE9DA;
+  --garis: #D5CDB8;
+  --khaki: #6B4E2E;
+  --matahari: #F2B632;
+  --matahari-tua: #C38E17;
+  --merah: #B7382A;
+  --tinta: #1B2A1F;
+  --abu: #5F6B62;
+  --putih: #FFFFFF;
+  --judul: "Baloo 2", system-ui, sans-serif;
+  --teks: "Nunito", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { font-family: var(--teks); color: var(--tinta); background: var(--krem); -webkit-tap-highlight-color: transparent; }
+h1, h2, h3 { font-family: var(--judul); margin: 0; line-height: 1.15; }
+p { margin: 0; }
+button { font-family: inherit; cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: 0.55; }
+input, select { font-family: inherit; }
+.tersembunyi { display: none !important; }
+:focus-visible { outline: 3px solid var(--matahari); outline-offset: 2px; }
+
+.tombol {
+  min-height: 52px; border: none; border-radius: 16px; padding: 0 20px;
+  font-family: var(--judul); font-size: 19px; font-weight: 800;
+  background: var(--matahari); color: var(--tinta); box-shadow: 0 4px 0 var(--matahari-tua);
+}
+.tombol:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--matahari-tua); }
+.tombol.hijau { background: var(--hutan); color: #fff; box-shadow: 0 4px 0 var(--hutan-tua); }
+.tombol.garis { background: #fff; color: var(--tinta); border: 2px solid var(--garis); box-shadow: none; }
+.tombol.merah { background: #fff; color: var(--merah); border: 2px solid var(--merah); box-shadow: none; }
+.tombol.kecil { min-height: 40px; font-size: 15px; padding: 0 14px; border-radius: 12px; font-family: var(--teks); }
+
+.kartu { background: #fff; border-radius: 22px; padding: 20px; box-shadow: 0 8px 24px rgba(31,107,58,0.10); }
+.label { font-size: 14px; font-weight: 800; color: #4A5A4E; }
+.isian {
+  width: 100%; height: 52px; border: 2px solid var(--garis); border-radius: 14px; padding: 0 14px;
+  font-size: 17px; font-weight: 700; color: var(--tinta); background: #fff;
+}
+.isian:focus { border-color: var(--daun); outline: none; }
+.lencana { flex-shrink: 0; display: block; }
+
+.toast {
+  position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%);
+  background: var(--tinta); color: #fff; padding: 12px 18px; border-radius: 14px; font-weight: 700;
+  z-index: 100; max-width: 90vw; box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+.pita-demo {
+  position: fixed; top: 0; right: 0; background: var(--matahari); color: var(--tinta); font-weight: 800;
+  font-size: 12px; padding: 4px 10px; border-bottom-left-radius: 10px; z-index: 200;
+}
+@keyframes denyut { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+@keyframes goyang { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+@keyframes muncul { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* Tombol suara */
+.tombol-suara { position: fixed; left: 14px; bottom: 14px; z-index: 60; display: inline-flex; align-items: center; gap: 10px;
+  border: none; border-radius: 99px; background: var(--matahari); color: var(--tinta); font-weight: 800; font-size: 15px;
+  min-width: 48px; height: 48px; padding: 0 12px; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,0.2); }
+.tombol-suara .silang { display: none; }
+.tombol-suara.bisu { background: #fff; }
+.tombol-suara.bisu .silang { display: inline; }
+.tombol-suara.bisu .gelombang { display: none; }
+.tombol-suara.besar { height: 60px; padding: 0 22px; font-size: 18px; animation: denyut 1.6s infinite; }
+.tombol-suara:not(.besar) span { display: none; }

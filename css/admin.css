@@ -1,0 +1,52 @@
+/* ============ Panel pembina ============ */
+.gerbang { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--hutan); }
+.panel { padding: 24px 28px 48px; display: flex; flex-direction: column; gap: 20px; max-width: 1500px; margin: 0 auto; }
+.atas { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; }
+.atas h1 { font-size: 30px; }
+.catatan { font-size: 13px; color: var(--abu); }
+.baris-tombol { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.tombol.kecil { text-decoration: none; display: inline-flex; align-items: center; }
+.tata { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+.kiri { flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 20px; max-width: 460px; }
+.kanan { flex: 999 1 640px; min-width: 0; }
+.blok { display: flex; flex-direction: column; gap: 12px; }
+.blok h2 { font-size: 22px; }
+.kolom { display: flex; flex-direction: column; gap: 6px; }
+.baris-qr { display: flex; gap: 16px; align-items: center; }
+.qr { width: 140px; height: 140px; background: #fff; padding: 6px; border-radius: 12px; border: 2px solid var(--krem-tua); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.qr img, .qr canvas { width: 100% !important; height: auto !important; }
+.kode { font-family: var(--judul); font-size: 26px; word-break: break-all; font-weight: 800; letter-spacing: 0.06em; line-height: 1; }
+.saklar { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 48px; padding: 0 14px; background: var(--krem); border-radius: 14px; font-weight: 800; }
+.saklar input { width: 24px; height: 24px; accent-color: var(--hutan); }
+details summary { cursor: pointer; font-weight: 800; color: var(--hutan); }
+
+.babak { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 12px; }
+.babak.aktif { background: var(--daun-muda); border: 2px solid var(--hutan); }
+.babak .no { width: 28px; height: 28px; border-radius: 50%; background: var(--krem-tua); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; flex-shrink: 0; }
+.babak.aktif .no { background: var(--matahari); }
+.babak.lewat .no { background: var(--hutan); color: #fff; }
+.babak .nm { flex: 1; font-weight: 700; }
+.babak .st { font-size: 13px; font-weight: 800; color: var(--abu); }
+.babak input { width: 56px; height: 36px; border: 2px solid var(--garis); border-radius: 10px; text-align: center; font-weight: 700; }
+
+.grid-centang { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; max-height: 300px; overflow-y: auto; }
+.grid-centang label { display: flex; align-items: center; gap: 8px; padding: 4px 6px; border-radius: 10px; font-weight: 700; font-size: 14px; }
+.grid-centang label:hover { background: var(--krem); }
+.grid-centang input { width: 18px; height: 18px; accent-color: var(--hutan); }
+.grid-centang .hapus { margin-left: auto; border: none; background: none; color: var(--merah); font-weight: 800; }
+
+.tabel { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 760px; }
+.tabel th { text-align: left; font-size: 12px; color: var(--abu); padding: 8px; border-bottom: 2px solid var(--krem-tua); white-space: nowrap; }
+.tabel td { padding: 8px; border-bottom: 1px solid var(--krem-tua); vertical-align: middle; }
+.tabel .nama-regu { display: flex; align-items: center; gap: 10px; font-weight: 800; white-space: nowrap; }
+.tabel .anggota { color: #4A5A4E; font-size: 13px; max-width: 280px; }
+.tabel .angka { font-weight: 800; text-align: right; }
+.titik { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--daun); margin-right: 3px; vertical-align: middle; }
+.titik.mati { background: #C9C2B0; }
+.kotak-kecil { width: 40px; height: 40px; border-radius: 10px; border: 2px solid var(--garis); background: #fff; font-size: 18px; font-weight: 800; }
+.kotak-kecil.plus { background: var(--hutan); border-color: var(--hutan); color: #fff; }
+.baris-kelola td { background: var(--krem); }
+.anggota-kelola { display: flex; flex-direction: column; gap: 6px; }
+.anggota-kelola .item { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; background: #fff; border-radius: 10px; padding: 6px 10px; }
+.anggota-kelola .item .nm { font-weight: 800; min-width: 120px; }
+.anggota-kelola select { height: 36px; border-radius: 10px; border: 2px solid var(--garis); font-weight: 700; }

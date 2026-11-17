@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Layar Klasemen · Misi Sampah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/layar.css">
+</head>
+<body>
+<div class="layar">
+  <header class="atas">
+    <div class="judul">
+      <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><rect x="14" y="20" width="36" height="38" rx="6" fill="#3FA34D"/><rect x="10" y="12" width="44" height="9" rx="4" fill="#F2B632"/><rect x="26" y="6" width="12" height="7" rx="3" fill="#F2B632"/><circle cx="26" cy="36" r="3.5" fill="#1B2A1F"/><circle cx="38" cy="36" r="3.5" fill="#1B2A1F"/><path d="M25 45 q7 6 14 0" stroke="#1B2A1F" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+      <div>
+        <h1 id="judul">Misi Sampah</h1>
+        <p id="subjudul">Penilaian Pramuka Kelas 7</p>
+      </div>
+    </div>
+    <div id="kotakWaktu" class="kotak-waktu tersembunyi">
+      <div class="k">SISA WAKTU BABAK</div>
+      <div id="waktu" class="a">--:--</div>
+    </div>
+  </header>
+
+  <!-- LOBI -->
+  <section id="vLobi" class="tampilan tersembunyi">
+    <div class="lobi">
+      <div class="lobi-qr">
+        <div id="qr" class="qr"></div>
+        <p class="besar">Scan untuk bergabung</p>
+        <p id="linkMurid" class="kecil"></p>
+      </div>
+      <div class="lobi-regu">
+        <h2 id="jumlahLobi">Regu yang sudah terbentuk</h2>
+        <div id="gridLobi" class="grid-lobi"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KLASEMEN -->
+  <section id="vKlasemen" class="tampilan tersembunyi">
+    <div id="spanduk" class="spanduk tersembunyi"></div>
+    <div class="tata">
+      <div class="papan">
+        <p class="label-top">TOP 10 REGU</p>
+        <div id="papan" class="daftar-papan"></div>
+        <div id="pita" class="pita tersembunyi">
+          <span class="pita-label">PERINGKAT 11 DST.</span>
+          <div class="pita-jendela"><div id="pitaIsi" class="pita-isi"></div></div>
+        </div>
+        <p class="catatan-layar">Skor regu = rata-rata skor anggota + bonus kompak + poin pembina</p>
+      </div>
+      <aside class="kabar">
+        <h2>Aksi terbaru</h2>
+        <div id="kabar" class="daftar-kabar"></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section id="vFinal" class="tampilan tersembunyi">
+    <div class="final">
+      <div class="final-soal">
+        <div class="final-atas"><span id="finalNo" class="pil-kecil"></span><span id="finalHitung" class="hitung-besar"></span></div>
+        <h2 id="finalTanya"></h2>
+        <div id="finalPilihan" class="final-pilihan"></div>
+        <p id="finalInfo" class="final-info"></p>
+      </div>
+      <aside class="final-mini">
+        <h2>5 Besar</h2>
+        <div id="miniPapan"></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PODIUM -->
+  <section id="vPodium" class="tampilan tersembunyi">
+    <h2 class="podium-judul">Juara Misi Sampah</h2>
+    <div id="podium" class="podium"></div>
+    <div id="sisaPodium" class="sisa-podium"></div>
+  </section>
+
+  <button id="tombolSuara" class="tombol-suara besar" type="button">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4z"/><path class="gelombang" d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/><path class="silang" d="M16 9l6 6M22 9l-6 6"/></svg>
+    <span>Klik untuk menyalakan musik</span>
+  </button>
+
+  <div id="lapisJeda" class="lapis tersembunyi"><h2>Permainan dijeda</h2><p>Dengarkan arahan kakak pembina</p></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="lib/qrcode.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/store.js"></script>
+<script src="js/regu.js"></script>
+<script src="js/soal.js"></script>
+<script src="js/game.js"></script>
+<script src="js/suara.js"></script>
+<script src="js/layar.js"></script>
+</body>
+</html>

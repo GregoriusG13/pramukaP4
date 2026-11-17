@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel Pembina · Misi Sampah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<section id="gerbang" class="gerbang">
+  <form id="formPin" class="kartu" style="display:flex;flex-direction:column;gap:12px;width:min(360px,92vw)">
+    <h1 style="font-size:28px">Panel Pembina</h1>
+    <label class="label" for="pin">PIN pembina</label>
+    <input id="pin" class="isian" type="password" autocomplete="off">
+    <p id="pinGalat" class="galat tersembunyi" role="alert" style="color:var(--merah);font-weight:700">PIN salah.</p>
+    <button class="tombol hijau" type="submit">Masuk</button>
+  </form>
+</section>
+
+<main id="panel" class="panel tersembunyi">
+  <header class="atas">
+    <div>
+      <h1>Panel Pembina · Misi Sampah</h1>
+      <p id="infoSesi" class="catatan"></p>
+    </div>
+    <div class="baris-tombol">
+      <a id="linkLayar" class="tombol garis kecil" target="_blank" rel="noopener">Buka layar proyektor</a>
+      <button id="btnEkspor" class="tombol kecil hijau" type="button">Ekspor nilai (Excel)</button>
+    </div>
+  </header>
+
+  <div class="tata">
+    <div class="kiri">
+      <section class="kartu blok">
+        <h2>Sesi &amp; pendaftaran</h2>
+        <div class="baris-qr">
+          <div id="qr" class="qr" aria-label="QR kode link permainan"></div>
+          <div class="kolom">
+            <span class="catatan">Kode sesi</span>
+            <span id="kodeSesi" class="kode"></span>
+            <span id="jumlahMurid" style="font-weight:800;color:var(--hutan)"></span>
+            <a id="linkMurid" target="_blank" rel="noopener" class="catatan" style="word-break:break-all"></a>
+          </div>
+        </div>
+        <label class="saklar"><span>Kunci pendaftaran</span><input id="kunciDaftar" type="checkbox"></label>
+        <details>
+          <summary>Ganti atau reset sesi</summary>
+          <div class="kolom" style="margin-top:10px">
+            <label class="label" for="inputSesi">Kode sesi (huruf/angka)</label>
+            <div class="baris-tombol"><input id="inputSesi" class="isian" maxlength="12" style="flex:1"><button id="btnGantiSesi" class="tombol garis kecil" type="button">Pakai</button></div>
+            <button id="btnReset" class="tombol merah kecil" type="button">Reset sesi ini (hapus semua data)</button>
+          </div>
+        </details>
+      </section>
+
+      <section class="kartu blok">
+        <h2>Alur babak</h2>
+        <div id="daftarBabak" class="kolom"></div>
+        <div id="kontrolBabak" class="baris-tombol"></div>
+        <label class="saklar"><span>Bekukan klasemen di layar</span><input id="bekukan" type="checkbox"></label>
+      </section>
+
+      <section class="kartu blok">
+        <h2>Daftar regu di dropdown</h2>
+        <p class="catatan">Centang regu yang boleh dipilih murid.</p>
+        <div id="daftarReguAktif" class="grid-centang"></div>
+        <div class="baris-tombol">
+          <input id="reguBaru" class="isian" placeholder="Nama regu baru" maxlength="20" style="flex:1;min-width:140px">
+          <select id="jenisBaru" class="isian" style="width:auto"><option>Putra</option><option>Putri</option></select>
+          <button id="btnTambahRegu" class="tombol garis kecil" type="button">Tambah</button>
+        </div>
+      </section>
+
+      <section id="blokDemo" class="kartu blok tersembunyi">
+        <h2>Mode Demo</h2>
+        <p class="catatan">Isi Firebase di <code>js/config.js</code> untuk dipakai sungguhan. Di mode ini kamu bisa menambah murid simulasi yang menjawab otomatis.</p>
+        <div class="baris-tombol">
+          <button id="btnBot" class="tombol kecil" type="button">Tambah 72 murid simulasi</button>
+          <button id="btnHapusBot" class="tombol garis kecil" type="button">Hapus murid simulasi</button>
+        </div>
+      </section>
+    </div>
+
+    <section class="kartu blok kanan">
+      <div class="baris-tombol" style="justify-content:space-between">
+        <h2>Regu dan anggota</h2>
+        <span id="ringkasRegu" class="catatan"></span>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="tabel">
+          <thead><tr><th>#</th><th>Regu</th><th>Anggota</th><th>Rata²</th><th>Bonus</th><th>Manual</th><th>Total</th><th>Poin manual</th><th></th></tr></thead>
+          <tbody id="tabelRegu"></tbody>
+        </table>
+      </div>
+      <p class="catatan">Skor di tabel ini adalah poin permainan. Nilai 0–100 dihitung terpisah saat ekspor Excel (tanpa bonus kecepatan, kombo, dan poin manual).</p>
+    </section>
+  </div>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="lib/qrcode.min.js"></script>
+<script src="lib/xlsx.full.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/store.js"></script>
+<script src="js/regu.js"></script>
+<script src="js/soal.js"></script>
+<script src="js/game.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

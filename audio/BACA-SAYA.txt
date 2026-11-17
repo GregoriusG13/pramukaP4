@@ -1,0 +1,10 @@
+Folder ini boleh dibiarkan kosong. Musik latar otomatis dibuat oleh aplikasi.
+
+Kalau ingin memakai lagu sendiri (pastikan bebas royalti, misalnya dari
+YouTube Audio Library atau Pixabay Music), taruh file MP3 dengan nama:
+
+  musik-santai.mp3  -> diputar di lobi dan jeda antarbabak
+  musik-main.mp3    -> diputar saat babak 1-4 berjalan
+  musik-final.mp3   -> diputar saat babak final
+
+Musik hanya diputar di layar proyektor (layar.html), tidak di HP murid.
