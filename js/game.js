@@ -119,7 +119,13 @@ function hitungRegu(game) {
   return hasil;
 }
 
-/* ---------- Nilai 0–100 (tanpa bonus apa pun) ---------- */
+/* ---------- Nilai 0–100 (tanpa bonus apa pun) ----------
+   Nilai per kompetensi = benar ÷ soal yang DIKERJAKAN.
+   Supaya murid yang hanya mengerjakan sedikit soal tidak otomatis
+   dapat 100, pembaginya minimal MIN_DIKERJAKAN.
+   Contoh K2: benar 6 dari 7 soal dikerjakan → 6 ÷ 8 (minimum) = 75. */
+const MIN_DIKERJAKAN = { K1: 15, K2: 8, K3: 8 };
+
 function totalSoal() {
   const t = { K1: SOAL_PILAH.length, K2: SOAL_KUIS.length, K3: SOAL_SKENARIO.length, K4: SOAL_MISI.length };
   SOAL_FINAL.forEach((f) => (t[f.kompetensi] += 1));
@@ -129,27 +135,35 @@ function hitungNilai(game) {
   const players = (game && game.players) || {};
   const misi = (game && game.misi) || {};
   const config = (game && game.config) || {};
-  const tot = totalSoal();
+  const st = (game && game.state) || {};
+  const finalDimainkan = (st.babak || 0) >= 5;
   return Object.entries(players).filter(([, p]) => p && p.nama && p.regu).map(([pid, p]) => {
     const ans = p.ans || {};
     const benar = { K1: 0, K2: 0, K3: 0, K4: 0 };
-    const hitung = (b) => Object.values(ans[b] || {}).filter((a) => a && a.c).length;
-    benar.K1 = hitung(1);
-    benar.K2 = hitung(2);
-    benar.K3 = hitung(3);
-    Object.entries(ans[5] || {}).forEach(([fid, a]) => {
-      const f = SOAL_FINAL.find((x) => x.id === fid);
-      if (f && a && a.c) benar[f.kompetensi] += 1;
+    const dikerjakan = { K1: 0, K2: 0, K3: 0, K4: SOAL_MISI.length };
+    [[1, "K1"], [2, "K2"], [3, "K3"]].forEach(([b, k]) => {
+      const daftar = Object.values(ans[b] || {}).filter(Boolean);
+      dikerjakan[k] = daftar.length;
+      benar[k] = daftar.filter((a) => a.c).length;
+    });
+    // Soal final tampil untuk semua murid sekaligus, jadi selalu dihitung dikerjakan
+    if (finalDimainkan) SOAL_FINAL.forEach((f) => {
+      dikerjakan[f.kompetensi] += 1;
+      const a = (ans[5] || {})[f.id];
+      if (a && a.c) benar[f.kompetensi] += 1;
     });
     const m = misi[p.regu] || {};
     benar.K4 = SOAL_MISI.filter((s) => m[s.id] && m[s.id].locked && m[s.id].benar).length;
     const persen = {};
-    Object.keys(tot).forEach((k) => (persen[k] = tot[k] ? Math.round((benar[k] / tot[k]) * 100) : 0));
+    ["K1", "K2", "K3", "K4"].forEach((k) => {
+      const pembagi = Math.max(dikerjakan[k], MIN_DIKERJAKAN[k] || 1);
+      persen[k] = Math.round((benar[k] / pembagi) * 100);
+    });
     const nilai = Math.round(
       (persen.K1 * BOBOT_NILAI.K1 + persen.K2 * BOBOT_NILAI.K2 + persen.K3 * BOBOT_NILAI.K3 + persen.K4 * BOBOT_NILAI.K4) / 100
     );
     const predikat = PREDIKAT.find((x) => nilai >= x.min).label;
-    return { pid, nama: p.nama, regu: cariRegu(p.regu, config.custom).nama, benar, tot, persen, nilai, predikat, skorGame: p.score || 0 };
+    return { pid, nama: p.nama, regu: cariRegu(p.regu, config.custom).nama, benar, dikerjakan, persen, nilai, predikat, skorGame: p.score || 0 };
   }).sort((a, b) => a.regu.localeCompare(b.regu) || a.nama.localeCompare(b.nama));
 }
 
